@@ -29,7 +29,6 @@ class customer(models.Model):
         verbose_name = 'سازنده یا مالک'
         verbose_name_plural = "سازنده یا مالک"
         pass
-    user = models.OneToOneField(User, verbose_name="کاربر", on_delete=models.CASCADE, null=False)
     id_code = models.CharField("کدملی", null=False, blank=False, max_length=10, default=9090)
     l_name = models.CharField("نام خانوادگی", max_length=30, null=False)
     join_time = models.DateTimeField("زمان عضویت", auto_now_add=True)

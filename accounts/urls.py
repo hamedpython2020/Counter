@@ -4,5 +4,7 @@ from accounts import views
 app_name = 'accounts'
 
 urlpatterns = [
-    # path('', views.)
+    path('employee/new', views.Newemployee, name='new_employee'),
+    path('costumer/new', views.Newcostumer, name='new_costumer'),
+
 ]
