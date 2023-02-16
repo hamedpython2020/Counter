@@ -1,11 +1,14 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
-
 from accounts.forms import EmployeeForm, CustomerForm, NewUser
+
+
+def index(request):
+    return HttpResponse('home')
 
 
 def Newemployee(request):
@@ -68,5 +71,8 @@ def Login(request):
     return render(request, "accounts/login.html", context)
 
 
-def index(request):
-    return HttpResponse('home')
+def Logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse(viewname='login'))
+
+
