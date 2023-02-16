@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from accounts.models import employee, customer
+from accounts.models import employee, customer, payment
 
 
 class NewUser(UserCreationForm):
@@ -22,3 +22,12 @@ class CustomerForm(forms.ModelForm):
         exclude = []
         pass
     pass
+
+
+class PayForm(forms.ModelForm):
+    class Meta:
+        model = payment
+        exclude = []
+        pass
+    pass
+

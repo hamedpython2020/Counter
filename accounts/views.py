@@ -4,11 +4,11 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
-from accounts.forms import EmployeeForm, CustomerForm, NewUser
+from accounts.forms import EmployeeForm, CustomerForm, NewUser, PayForm
 
 
 def index(request):
-    return HttpResponse('home')
+    return render(request, 'accounts/index.html', context={})
 
 
 def Newemployee(request):
@@ -76,3 +76,15 @@ def Logout(request):
     return HttpResponseRedirect(reverse(viewname='login'))
 
 
+def Payment(request):
+    if request.method == 'POST':
+        context = {
+
+        }
+        pass
+    else:
+        pay = PayForm()
+        context = {
+            'pay': pay
+        }
+    return render(request, 'accounts/payment.html', context)
