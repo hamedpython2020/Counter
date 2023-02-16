@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from datetime import datetime,date
+from datetime import datetime, date
 from django.utils import timezone
 
 
@@ -39,6 +39,7 @@ class customer(models.Model):
                                 help_text="لطفا یک عکس با  فامیل خود آپلود کنید")
 
     bill = models.IntegerField("صورت حساب", default=0, null=False)
+
     def __str__(self):
         return "customer {}".format(self.l_name)
     pass
@@ -52,6 +53,7 @@ class payment(models.Model):
     manager = models.ForeignKey('customer', verbose_name="مسئول", on_delete=models.PROTECT, null=False)
     value = models.IntegerField('مبلغ', null=False, default=0)
     date = models.DateField("تاریخ", null=False, default=timezone.now)
+
     def __str__(self):
         return "{} pay {}".format(self.manager, self.value)
     pass

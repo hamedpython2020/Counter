@@ -16,7 +16,7 @@ class EmployeeForm(forms.ModelForm):
     pass
 
 
-class CostumerForm(forms.ModelForm):
+class CustomerForm(forms.ModelForm):
     class Meta:
         model = customer
         exclude = []

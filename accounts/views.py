@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from accounts.forms import EmployeeForm, CostumerForm
+from accounts.forms import EmployeeForm, CustomerForm
 
 
 def Newemployee(request):
@@ -17,14 +17,14 @@ def Newemployee(request):
     return render(request, 'accounts/new_employee.html', context)
 
 
-def Newcostumer(request):
+def Newcustomer(request):
     if request.method == 'POST':
         context = {
 
         }
     else:
-        costumer = CostumerForm()
+        customer = CustomerForm()
         context = {
-            'costumer': costumer
+            'customer': customer
         }
-    return render(request,'accounts/new_costumer.html', context)
+    return render(request, 'accounts/new_customer.html', context)
