@@ -1,7 +1,11 @@
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from accounts.forms import EmployeeForm, CustomerForm
+from django.urls import reverse
+
+from accounts.forms import EmployeeForm, CustomerForm, NewUser
 
 
 def Newemployee(request):
@@ -28,3 +32,41 @@ def Newcustomer(request):
             'customer': customer
         }
     return render(request, 'accounts/new_customer.html', context)
+
+
+def Signup(request):
+    if request.method == 'POST':
+        context = {}
+    else:
+        user = NewUser()
+        context = {
+            'user': user
+        }
+    return render(request, 'accounts/signup.html', context)
+
+
+def Login(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, password=password, username=username)
+        if user is None:
+            context = {
+                'username': username,
+                'error': 'موجود نیست'
+            }
+        else:
+            login(request, user)
+            if request.GET.get('next'):
+                return HttpResponseRedirect(request.GET.get('next'))
+            else:
+                return HttpResponseRedirect(reverse(viewname='index'))
+            pass
+        pass
+    else:
+        context = {}
+    return render(request, "accounts/login.html", context)
+
+
+def index(request):
+    return HttpResponse('home')
