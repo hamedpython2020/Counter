@@ -13,16 +13,18 @@ def index(request):
 
 
     ################## New user and complete Profile {employee , customer} ############
+
+
 def Newemployee(request):
     if request.method == 'POST':
-        employee = EmployeeForm(request.POST)
+        employee = EmployeeForm(request.POST, request.FILES)
         if employee.is_valid():
             employee.save()
             user = request.user
             user.staff = True
-            context = {
-
-        }
+            
+            return HttpResponseRedirect(reverse('index'))
+        context = {}
     else:
         employee = EmployeeForm()
         context = {
@@ -45,8 +47,19 @@ def Newcustomer(request):
 
 
     ###################    user Registrations ########################
+
+
+################## User Registrations ####################
 def Signup(request):
+    if request.user is not None:
+        logout(request)
+        pass
     if request.method == 'POST':
+        user = NewUser(request.POST)
+        if user.is_valid():
+            user.save()
+            login(request, user)
+            return HttpResponseRedirect(reverse('accounts:new_employee'))
         context = {}
     else:
         user = NewUser()
@@ -81,10 +94,10 @@ def Login(request):
 
 def Logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse(viewname='login'))
+    return HttpResponseRedirect(reverse('accounts:login'))
 
 
-    ################## Payment views {list , creat } ####################
+################## Payment views {list , creat } ####################
 def NewPayment(request):
     if request.method == 'POST':
         pay = PayForm(request.POST)
@@ -106,18 +119,16 @@ def NewPayment(request):
 def Paymentlist(request):
     try:
         pay = payment.objects.all().order_by('date')
+        pay_c = pay.count()
         context = {
-            'pay': pay
+            'pay': pay,
+            'pay_c': pay_c
         }
     except:
-        error = 'Something wrong'
+        error = 'Something is wrong'
         context = {
             'error': error
         }
         pass
     return render(request, 'accounts/payment_list.html', context)
-
-
-
-    pass
 
