@@ -67,7 +67,7 @@ def NewService(request):
         if service.is_valid():
             service = service.save()
             cost_service = service.cost_service
-            customer = service.customer
+            customer = service.manager
             customer.spend(cost_service)
             customer.save()
             service.save()

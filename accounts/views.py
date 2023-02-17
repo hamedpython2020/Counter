@@ -6,7 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 from accounts.forms import EmployeeForm, CustomerForm, NewUser, PayForm
-from accounts.models import payment
+from accounts.models import payment, employee
 
 
 def index(request):
@@ -36,6 +36,20 @@ def Newemployee(request):
     return render(request, 'accounts/new_employee.html', context)
 
 
+def Employee(request, employee_id):
+    try:
+        prof = employee.objects.get(id=employee_id)
+        context = {
+           'prof': prof
+        }
+    except:
+        error = 'Something went wrong'
+        context = {
+            'error': error
+        }
+    return render(request, 'accounts/employee.html', context)
+
+
 def Newcustomer(request):
     if request.method == 'POST':
         customer = CustomerForm(request.POST, request.FILES)
@@ -52,8 +66,22 @@ def Newcustomer(request):
     return render(request, 'accounts/new_customer.html', context)
 
 
+def Customer(request, customer_id):
+    try:
+        customer = employee.objects.get(id=customer_id)
+        context = {
+           'customer': customer
+        }
+    except:
+        error = 'Something went wrong'
+        context = {
+            'error': error
+        }
+    return render(request, 'accounts/customer.html', context)
+
 
 ################## User Registrations ####################
+
 def Signup(request):
     if request.user is not None:
         logout(request)
