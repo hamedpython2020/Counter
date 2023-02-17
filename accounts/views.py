@@ -85,7 +85,7 @@ def Signup(request):
     if request.method == 'POST':
         user = NewUser(request.POST)
         if user.is_valid():
-            user.save()
+            user = user.save()
             login(request, user)
             return HttpResponseRedirect(reverse('accounts:new_employee'))
         context = {}
