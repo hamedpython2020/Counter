@@ -9,6 +9,7 @@ class employee(models.Model):
     class Mete:
         verbose_name = "کارمند"
         verbose_name_plural = "کارمند"
+        pass
 
     user = models.OneToOneField(User, verbose_name="کاربر", on_delete=models.CASCADE, null=False)
     id_code = models.CharField("کدملی", null=False, blank=False, max_length=10, default=1010)
@@ -42,6 +43,16 @@ class customer(models.Model):
 
     def __str__(self):
         return "customer {}".format(self.l_name)
+
+    def pay(self, amount):
+        self.bill -= amount
+        self.save()
+        return self
+
+    def spend(self, value):
+        self.bill += value
+        self.save()
+        return self
     pass
 
 
