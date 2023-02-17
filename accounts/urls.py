@@ -10,9 +10,9 @@ urlpatterns = [
     path('payment/list/', views.Paymentlist, name='payment_list'),
     path('signup/', views.Signup, name='signup'),
     path('customer/new/', views.Newcustomer, name='new_customer'),
+    path('customer/list/', views.Customerlist, name='customer_list'),
     path('customer/<int:customer_id>/', views.Customer, name='customer'),
     path('login/', views.Login, name='login'),
     path('logout/', views.Logout, name='logout'),
-
 
 ]

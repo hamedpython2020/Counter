@@ -6,8 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 from accounts.forms import EmployeeForm, CustomerForm, NewUser, PayForm
-from accounts.models import payment, employee
-
+from accounts.models import payment, employee, customer
 
 def index(request):
     return render(request, 'accounts/index.html', context={})
@@ -65,6 +64,16 @@ def Customer(request, customer_id):
        'customer': customer
     }
     return render(request, 'accounts/customer.html', context)
+
+
+def Customerlist(request):
+    obj = customer.objects.all().order_by('l_name')
+    obj_c = obj.count()
+    context = {
+        'obj': obj,
+        'obj_c': obj_c
+    }
+    return render(request, 'accounts/customer_list.html', context)
 
 
 ################## User Registrations ####################
