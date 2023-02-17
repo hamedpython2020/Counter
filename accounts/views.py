@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
@@ -15,14 +16,16 @@ def index(request):
     ################## New user and complete Profile {employee , customer} ############
 
 
+@login_required
 def Newemployee(request):
     if request.method == 'POST':
         employee = EmployeeForm(request.POST, request.FILES)
         if employee.is_valid():
-            employee.save()
             user = request.user
-            user.staff = True
-            
+            user.is_staff = True
+            user.save()
+            employee.save()
+
             return HttpResponseRedirect(reverse('index'))
         context = {}
     else:
