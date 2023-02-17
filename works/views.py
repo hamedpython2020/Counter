@@ -9,7 +9,7 @@ from works.forms import ProjectForm, DocForm, ServicesForm
 
 
 # @login_required
-from works.models import project
+from works.models import project, Services
 
 
 def Newproject(request):
@@ -44,7 +44,7 @@ def Projectlist(request):
         }
     return render(request, 'works/project_list.html', context)
 
-# @login_required
+
 def Docupload(request):
     if request.method == 'POST':
         document = DocForm(request.POST, request.FILES)
@@ -59,10 +59,8 @@ def Docupload(request):
             'document': document
         }
     return render(request, 'works/upload_doc.html', context)
-    pass
 
 
-# @login_required
 def NewService(request):
     if request.method == 'POST':
         service = ServicesForm(request.POST, request.FILES)
@@ -77,4 +75,19 @@ def NewService(request):
             'service': service
         }
     return render(request, 'works/service_new.html', context)
-    pass
+
+
+def Servicelist(request):
+    try:
+        service = Services.objects.all().order_by('date')
+        service_c = service.count()
+        context = {
+            'service': service,
+            'service_c': service_c
+        }
+    except:
+        error = 'Something went wrong'
+        context = {
+            'error': error
+        }
+    return render(request, 'works/service_list.html', context)
