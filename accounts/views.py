@@ -38,8 +38,11 @@ def Newemployee(request):
 
 def Newcustomer(request):
     if request.method == 'POST':
+        customer = CustomerForm(request.POST, request.FILES)
+        if customer.is_valid():
+            customer.save()
+            return HttpResponseRedirect(reverse('works:project_new'))
         context = {
-
         }
     else:
         customer = CustomerForm()
@@ -48,8 +51,6 @@ def Newcustomer(request):
         }
     return render(request, 'accounts/new_customer.html', context)
 
-
-    ###################    user Registrations ########################
 
 
 ################## User Registrations ####################
