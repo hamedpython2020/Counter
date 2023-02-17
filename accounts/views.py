@@ -16,7 +16,6 @@ def index(request):
     ################## New user and complete Profile {employee , customer} ############
 
 
-@login_required
 def Newemployee(request):
     if request.method == 'POST':
         employee = EmployeeForm(request.POST, request.FILES)
@@ -37,16 +36,10 @@ def Newemployee(request):
 
 
 def Employee(request, employee_id):
-    try:
-        prof = employee.objects.get(id=employee_id)
-        context = {
-           'prof': prof
-        }
-    except:
-        error = 'Something went wrong'
-        context = {
-            'error': error
-        }
+    prof = employee.objects.get(id=employee_id)
+    context = {
+       'prof': prof
+    }
     return render(request, 'accounts/employee.html', context)
 
 
@@ -67,16 +60,10 @@ def Newcustomer(request):
 
 
 def Customer(request, customer_id):
-    try:
-        customer = employee.objects.get(id=customer_id)
-        context = {
-           'customer': customer
-        }
-    except:
-        error = 'Something went wrong'
-        context = {
-            'error': error
-        }
+    customer = employee.objects.get(id=customer_id)
+    context = {
+       'customer': customer
+    }
     return render(request, 'accounts/customer.html', context)
 
 
