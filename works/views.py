@@ -18,15 +18,13 @@ def Newproject(request):
         if project.is_valid():
             project.save()
             return HttpResponseRedirect(reverse('works:services_new'))
-        context = {}
         pass
     else:
         project = ProjectForm()
         context = {
             'project': project
         }
-    return render(request, 'works/new_project.html', context)
-    pass
+        return render(request, 'works/new_project.html', context)
 
 
 def Projectlist(request):

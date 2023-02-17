@@ -48,8 +48,10 @@ def Newcustomer(request):
         if customer.is_valid():
             customer.save()
             return HttpResponseRedirect(reverse('works:project_new'))
-        context = {
-        }
+        else:
+            context = {
+                'error': 'we have wrong here'
+            }
     else:
         customer = CustomerForm()
         context = {

@@ -5,11 +5,11 @@
     <title>سازنده یا مالک جدید</title>
 </head>
 <body>
-<form action="" method="post">
-
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ customer }}
-
+    {{ customer.errors }}
+    {{ error }}
     <button type="submit">
         confirm
     </button>
