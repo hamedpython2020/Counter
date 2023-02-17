@@ -6,7 +6,11 @@
 </head>
 <body>
 <form method="Post">
+    {% csrf_token %}
     {{ project }}
+    <button type="submit">
+        confirm
+    </button>
 </form>
 </body>
 </html>

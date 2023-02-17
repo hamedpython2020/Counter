@@ -44,7 +44,7 @@ class customer(models.Model):
     def __str__(self):
         return "customer {}".format(self.l_name)
 
-    def pay(self, amount):
+    def pay_service(self, amount):
         self.bill -= amount
         self.save()
         return self

@@ -65,6 +65,11 @@ def NewService(request):
     if request.method == 'POST':
         service = ServicesForm(request.POST, request.FILES)
         if service.is_valid():
+            service = service.save()
+            cost_service = service.cost_service
+            customer = service.customer
+            customer.spend(cost_service)
+            customer.save()
             service.save()
             return HttpResponseRedirect(reverse('index'))
         context = {}

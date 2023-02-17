@@ -106,8 +106,13 @@ def NewPayment(request):
     if request.method == 'POST':
         pay = PayForm(request.POST)
         if pay.is_valid():
+            pay = pay.save()
+            value = pay.value
+            customer = pay.manager
+            customer.pay_service(value)
+            customer.save()
             pay.save()
-            return HttpResponseRedirect(reverse(viewname='payment_list'))
+            return HttpResponseRedirect(reverse('accounts:payment_list'))
         context = {
 
         }

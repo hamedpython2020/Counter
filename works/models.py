@@ -76,6 +76,11 @@ class Services(models.Model):
     )
     define_services = models.IntegerField("خدمات تعریف شده", choices=services_choices)
     cost_services = models.IntegerField('هزینه', null=False)
-    description = models.TextField("خدمات متفرقه", null=True)
+    description = models.TextField("خدمات متفرقه", null=False)
     project = models.ForeignKey("project", verbose_name="پروژه", null=False, on_delete=models.PROTECT)
     date = models.DateField("تاریخ درخواست", default=timezone.now, null=False)
+    manager = models.OneToOneField(customer, verbose_name="سازنده یا مالک", null=False, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return "{} for {}".format(self.define_services, self.manager)
+    pass

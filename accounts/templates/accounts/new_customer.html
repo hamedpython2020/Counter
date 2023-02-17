@@ -6,7 +6,13 @@
 </head>
 <body>
 <form action="" method="post">
+
+    {% csrf_token %}
     {{ customer }}
+
+    <button type="submit">
+        confirm
+    </button>
 </form>
 </body>
 </html>
