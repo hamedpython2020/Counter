@@ -3,10 +3,11 @@ from django import forms
 from works.models import Services, project, p_document
 
 
+
 class ServicesForm(forms.ModelForm):
     class Meta:
         model = Services
-        fields = ['define_services', 'cost_services', 'description', 'project', 'date']
+        exclude = []
         pass
     # years = []
     # for i in range(1330, 1420):

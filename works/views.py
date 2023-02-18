@@ -18,13 +18,16 @@ def Newproject(request):
         if project.is_valid():
             project.save()
             return HttpResponseRedirect(reverse('works:services_new'))
-        pass
+        else:
+            context = {
+                'errors': "Something went wrong"
+            }
     else:
         project = ProjectForm()
         context = {
             'project': project
         }
-        return render(request, 'works/new_project.html', context)
+    return render(request, 'works/new_project.html', context)
 
 
 def Projectlist(request):
@@ -68,7 +71,6 @@ def NewService(request):
             customer = service.manager
             customer.spend(cost_service)
             customer.save()
-            service.save()
             return HttpResponseRedirect(reverse('index'))
         context = {}
         pass

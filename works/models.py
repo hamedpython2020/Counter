@@ -32,7 +32,7 @@ class project(models.Model):
         (9, 'متفرقه')
     )
     status = models.IntegerField('وضعیت پروژه', choices=status_choices)
-    description = models.TextField("توضیحات", null=True)
+    description = models.TextField(verbose_name="توضیحات", blank=True)
     manager = models.OneToOneField(customer, on_delete=models.CASCADE, verbose_name="مالک یا سازنده")
     
     def __str__(self):
@@ -76,7 +76,7 @@ class Services(models.Model):
     )
     define_services = models.IntegerField("خدمات تعریف شده", choices=services_choices)
     cost_services = models.IntegerField('هزینه', null=False)
-    description = models.TextField("خدمات متفرقه", null=False)
+    description = models.TextField("خدمات متفرقه", blank=True)
     project = models.ForeignKey("project", verbose_name="پروژه", null=False, on_delete=models.PROTECT)
     date = models.DateField("تاریخ درخواست", default=timezone.now, null=False)
     manager = models.OneToOneField(customer, verbose_name="سازنده یا مالک", null=False, on_delete=models.PROTECT)

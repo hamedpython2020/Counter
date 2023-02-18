@@ -5,9 +5,10 @@
   <title>پروژه جدید</title>
 </head>
 <body>
-<form method="Post">
+<form method="Post" action="" enctype="multipart/form-data" >
     {% csrf_token %}
     {{ project }}
+    {{ errors }}
     <button type="submit">
         confirm
     </button>
