@@ -31,18 +31,12 @@ def Newproject(request):
 
 
 def Projectlist(request):
-    try:
-        projects = project.objects.all().order_by('add_time')
-        projects_c = projects.count()
-        context = {
-            'projects': projects,
-            'projects_c': projects_c
-        }
-    except:
-        error = 'Something went wrong'
-        context = {
-            'error': error
-        }
+    projects = project.objects.all().order_by('add_time')
+    projects_c = projects.count()
+    context = {
+        'projects': projects,
+        'projects_c': projects_c
+    }
     return render(request, 'works/project_list.html', context)
 
 
@@ -85,16 +79,10 @@ def NewService(request):
 
 
 def Servicelist(request):
-    try:
-        service = Services.objects.all().order_by('date')
-        service_c = service.count()
-        context = {
-            'service': service,
-            'service_c': service_c
-        }
-    except:
-        error = 'Something went wrong'
-        context = {
-            'error': error
-        }
-    return render(request, 'works/service_list.html', context)
+     service = Services.objects.all().order_by('date')
+     service_c = service.count()
+     context = {
+         'service': service,
+         'service_c': service_c
+     }
+     return render(request, 'works/service_list.html', context)
